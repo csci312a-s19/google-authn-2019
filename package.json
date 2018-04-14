@@ -1,8 +1,8 @@
 {
-  "name": "project",
+  "name": "google-authn",
   "version": "0.1.0",
   "private": true,
-  "description": "Describe your project",
+  "description": "Google authorization example",
   "engines": {
     "node": "8.9.x"
   },
@@ -16,10 +16,7 @@
     "server/node_modules"
   ],
   "keywords": [],
-  "contributors": [
-    "Student1 <student1@middlebury.edu>",
-    "Student2 <student2@middlebury.edu>"
-  ],
+  "author": "Michael Linderman <mlinderman@middlebury.edu>",
   "license": "Apache-2.0",
   "devDependencies": {
     "concurrently": "^3.5.1"

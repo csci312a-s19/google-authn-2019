@@ -1,5 +1,5 @@
 {
-  "name": "project-server",
+  "name": "google-authn-server",
   "version": "0.1.0",
   "private": true,
   "description": "Server for ...",
@@ -7,13 +7,10 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
-    "start": "node index.js"
+    "start": "node -r dotenv/config index.js"
   },
   "keywords": [],
-  "contributors": [
-    "Student1 <student1@middlebury.edu>",
-    "Student2 <student2@middlebury.edu>"
-  ],
+  "author": "Michael Linderman <mlinderman@middlebury.edu>",
   "license": "Apache-2.0",
   "devDependencies": {
     "eslint": "^4.19.1",
@@ -22,6 +19,10 @@
     "jest": "^22.4.3"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "google-auth-library": "^1.4.0",
+    "passport": "^0.4.0",
+    "passport-custom": "^1.0.5"
   }
 }

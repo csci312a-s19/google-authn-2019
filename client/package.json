@@ -1,5 +1,5 @@
 {
-  "name": "project-client",
+  "name": "google-authn-client",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001",
@@ -11,14 +11,14 @@
     "lint": "eslint ."
   },
   "keywords": [],
-  "contributors": [
-    "Student1 <student1@middlebury.edu>",
-    "Student2 <student2@middlebury.edu>"
-  ],
+  "author": "Michael Linderman <mlinderman@middlebury.edu>",
   "license": "Apache-2.0",
   "dependencies": {
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-google-login": "^3.2.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1"
   },
   "devDependencies": {

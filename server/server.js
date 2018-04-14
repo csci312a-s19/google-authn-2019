@@ -1,4 +1,8 @@
+/* eslint-disable no-console */
 const express = require('express');
+const passport = require('passport');
+const CustomStrategy = require('passport-custom').Strategy;
+const { OAuth2Client } = require('google-auth-library');
 
 const app = express();
 
@@ -16,9 +20,44 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// TODO: Add any middleware here
+// Access the GOOGLE_CLIENT_ID from the environment instead of hardcoding
+// it into the application
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-// TODO: Add your routes here
+// Implement a simple passport custom strategy using the Google tokens as a
+// session
+passport.use('google-id-token', new CustomStrategy((request, done) => {
+  let token;
+  if (request.headers.authorization && request.headers.authorization.startsWith('Bearer ')) {
+    token = request.headers.authorization.slice(7);
+  } else {
+    done(null, false);
+    return;
+  }
+
+  googleClient.verifyIdToken({
+    idToken: token,
+    audience: process.env.GOOGLE_CLIENT_ID,
+  }).then((ticket) => {
+    const payload = ticket.getPayload();
+    // At this point you could create a user account from the payload if the user
+    // doesn't have one and create a session for the user (or continue to use
+    // the Google token as a session)
+    done(null, payload);
+  }).catch(() => done(null, false));
+}));
+
+app.use(passport.initialize());
+
+
+app.post(
+  '/login',
+  passport.authenticate('google-id-token', { session: false }),
+  (request, response) => {
+    console.log(request.user);
+    response.sendStatus(200);
+  },
+);
 
 module.exports = {
   app,
