@@ -107,7 +107,7 @@ class Login extends React.Component {
           buttonText="Login with Google"
           isSignedIn
           onSuccess={this.handleGoogleLogin}
-          onFailure={this.handleGoogleResponse}
+          onFailure={this.handleGoogleFailure}
         />
       </div>
     );
