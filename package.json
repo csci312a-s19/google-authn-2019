@@ -4,7 +4,7 @@
   "private": true,
   "description": "Google authorization example",
   "engines": {
-    "node": "8.9.x"
+    "node": "10.15.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,6 +19,6 @@
   "author": "Michael Linderman <mlinderman@middlebury.edu>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "concurrently": "^3.5.1"
+    "concurrently": "^4.1.0"
   }
 }
