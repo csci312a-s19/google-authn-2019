@@ -78,11 +78,11 @@ class Login extends React.Component {
       headers: {
         Authorization: `Bearer ${profile.tokenId}`,
       },
-    }).then(response => {
-      if (!response.ok) {
-        throw new Error(response.status_text);
+    }).then((fetchResponse) => {
+      if (!fetchResponse.ok) {
+        throw new Error(fetchResponse.status_text);
       }
-      return response.json();
+      return fetchResponse.json();
     }).then((data) => {
       console.log(data);
       Authn.saveProfile(profile);
