@@ -3,8 +3,12 @@ const express = require('express');
 const passport = require('passport');
 const CustomStrategy = require('passport-custom').Strategy;
 const { OAuth2Client } = require('google-auth-library');
+const bodyParser = require('body-parser');
 
 const app = express();
+app.use(bodyParser.json());
+
+const logins = new Map();
 
 // express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
@@ -54,8 +58,18 @@ app.post(
   '/login',
   passport.authenticate('google-id-token', { session: false }),
   (request, response) => {
-    console.log(request.user);
-    response.sendStatus(200);
+    let user = logins.get(request.user.email);
+    if (user === undefined) {
+      user = {
+        name: request.user.name,
+        email: request.user.email,
+        logins: 0,
+      };
+      logins.set(user.email, user);
+    }
+    user.logins += 1;
+    console.log(user);
+    response.send({ count: user.logins });
   },
 );
 

@@ -70,7 +70,6 @@ class Login extends React.Component {
       name: response.profileObj.name,
       tokenId: response.tokenId, // We will use this token to login to the server
     };
-
     // If we want to use the Google authentication on the server, send the token
     // to the server in the authorization header. The server will validate the token
     // and extract the profile information
@@ -79,7 +78,13 @@ class Login extends React.Component {
       headers: {
         Authorization: `Bearer ${profile.tokenId}`,
       },
-    }).then(() => {
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error(response.status_text);
+      }
+      return response.json();
+    }).then((data) => {
+      console.log(data);
       Authn.saveProfile(profile);
       this.setState({ successfulLogin: true });
     });
@@ -103,7 +108,7 @@ class Login extends React.Component {
       <div>
         <p>You must log in to view the page at {from.pathname}</p>
         <GoogleLogin
-          clientId="917756572861-n4m7sgc9narqgmgavu8uhglu11anb2gu.apps.googleusercontent.com"
+          clientId="833253079657-v2g067u0c0f1fkgreqntppltlrfa25kb.apps.googleusercontent.com"
           buttonText="Login with Google"
           isSignedIn
           onSuccess={this.handleGoogleLogin}
