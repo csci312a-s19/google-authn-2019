@@ -18,7 +18,9 @@
     "express": "^4.16.4",
     "google-auth-library": "^3.1.2",
     "passport": "^0.4.0",
-    "passport-custom": "^1.0.5"
+    "passport-custom": "^1.0.5",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-http-bearer": "^1.0.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
