@@ -30,6 +30,11 @@ class Authn {
   }
 }
 
+/*
+  This adds a protected route to the router. 
+  Basically, it just adds a thin guard around the component and redirects to the login page if the user
+  has not authenticated. 
+  */
 
 const PrivateRoute = ({ component: Comp, ...rest }) => (
   <Route
@@ -47,6 +52,9 @@ PrivateRoute.propTypes = {
   component: PropTypes.func.isRequired,
 };
 
+/*
+  The Login route just holds a instance of our Google login button.
+  */
 class Login extends React.Component {
   constructor() {
     super();

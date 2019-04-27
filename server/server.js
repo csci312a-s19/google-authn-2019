@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
 const express = require('express');
 const passport = require('passport');
-// const GoogleStrategy = require('passport-google-oauth2');
-// const CustomStrategy = require('passport-custom').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const { OAuth2Client } = require('google-auth-library');
 const bodyParser = require('body-parser');
@@ -26,45 +24,9 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// Access the GOOGLE_CLIENT_ID from the environment instead of hardcoding
+// Access the GOOGLE_CLIENT_ID from the environment instead of hard coding
 // it into the application
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-
-// // Implement a simple passport custom strategy using the Google tokens as a
-// // session
-// passport.use('google-id-token', new CustomStrategy((request, done) => {
-//   let token;
-//   if (request.headers.authorization && request.headers.authorization.startsWith('Bearer ')) {
-//     token = request.headers.authorization.slice(7);
-//   } else {
-//     done(null, false);
-//     return;
-//   }
-
-//   googleClient.verifyIdToken({
-//     idToken: token,
-//     audience: process.env.GOOGLE_CLIENT_ID,
-//   }).then((ticket) => {
-//     const payload = ticket.getPayload();
-//     // At this point you could create a user account from the payload if the user
-//     // doesn't have one and create a session for the user (or continue to use
-//     // the Google token as a session)
-//     done(null, payload);
-//   }).catch(() => done(null, false));
-// }));
-
-// passport.use(new GoogleStrategy({
-//   clientID: process.env.GOOGLE_CLIENT_ID,
-//   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-//   callbackURL: process.env.GOOGLE_CALLBACK_URL,
-//   passReqToCallback: true,
-// },
-// (request, accessToken, refreshToken, profile, done) => {
-//   console.log(profile.id);
-//   // should be the user from the database that we looked up using the profile,
-//   // but we will just do this now
-//   return done(null, profile);
-// }));
 
 
 passport.use(new BearerStrategy((token, done) => {
